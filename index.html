@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="css/theme/league.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -36,18 +36,12 @@
 
 	<body>
 
-
-                    <!--
-                    <section data-background-iframe="http://ndsu.edu">
-                    </section>
-                    -->
-
 		<div class="reveal">
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h3>Utilizing the Portability of Docker To Design A Portable and Scalable Continuous Integration Stack</h3>
+					<h3>Useing Neural Networks To Detect Examples of Ad Himinem In Politics and Microblogging Platforms</h3>
 					<p>
                         <br>
                         By Jordan Goetze <br>
@@ -65,481 +59,110 @@
                     <h2>Introduction</h2>
                     <ul>
                         <li class="fragment">
-                            A Continuous Integration Paradigm
+                            Tensorflow
                         </li>
                         <li class="fragment">
-                            Docker
+                            Model
                         </li>
                         <li class="fragment">
-                            Docker and Friends
+                            Dataset and Expirimental Setup
+                            <ul>
+                                <li class="fragment">
+                                    Data Preprocessing
+                                </li>
+                                <li class="fragment">
+                                    Hyperparameter Tuning
+                                </li>
+                                <li class="fragment">
+                                    Model Variations
+                                </li>
+                            </ul>
                         </li>
                         <li class="fragment">
-                            Simple, Reproducable, Master
-                        </li>
-                        <li class="fragment">
-                            Distributed, Swarmed Workers
+                            Results and Graphs
                         </li>
                     </ul>
                 </section>
 
                 <section>
                     <section>
-                        <h2>A Continuous Integration Paradigm</h2>
+                        <h2>Tensorflow</h2>
                     </section>
-
                     <section>
-                        <h2>Designing a generic ci system is hard.</h2>
+                        <h2>What is Tensorflow?</h2>
                         <ul>
-                            <li class="fragment">
-                                Different people/companies want to use different patterns
-                            </li>
-                            <li class="fragment">
-                                Some systems require a variety of different components
-                            </li>
-                            <li class="fragment">
-                                Scaling a CI system is challenging
-                            </li>
-                        </ul>
-                    </section>
-                    <section>
-                        <h2>Common Components of CI Systems</h2>
-                        <ul>
-                            <li class="fragment">
-                                Master-Worker relationship
-                            </li>
-                            <li class="fragment">
-                                Workers can be distributed
-                            </li>
-                        </ul>
-                    </section>
-                </section>
-
-                <section>
-                    <section>
-                        <h2>Docker</h2>
-                        <p>
-                            <pre><code data-trim>
-$ docker
-                            </code></pre>
-                        </p>
-                    </section>
-
-                    <section >
-                        <h2>What is Docker?</h2>
-                        <h3 class="fragment">What isn't Docker?</h3>
-                        <h4 class="fragment">Docker is not a virtual machine system</h4>
-                        <p class="fragment">At least not in the traditional sense</p>
-                    </section>
-
-                    <section>
-                        <h2>Understanding Docker:</h2> 
-                        <h4 class="fragment">How do virtual machines work?</h4>
-
-                    </section>
-                    
-                    <section >
-                        <h2>Comparison</h2>
-                        <table>
-                            <tr>
-                                <td>
-                                    Traditional VMs
-                                </td>
-                                <td>
-                                    Docker Containers
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img data-src="images/vms.jpg">
-                                </td>
-                                <td>
-                                    <img data-src="images/containers.jpg">
-                                </td>
-                            </tr>
-                        </table>
-                    </section>
-
-                    <section>
-                        <h2>What are Docker containers?<h2>
-                        <br>
-                        <h2 class="fragment">What are Docker images?</h3>
-                    </section>
-
-                    <section>
-                        <h2>Why user Docker?</h2>
-                        <table>
-                            <tr>
-                                <td class="fragment">
-                                    No Hypervisor
-                                </td>
-                                <td class="fragment">
-                                    Images
-                                </td>
-                                <td class="fragment">
-                                    Portability
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <ul>
-                                        <li class="fragment">
-                                            Performance Increase
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li class="fragment">
-                                            Uniformity  
-                                        </li>
-                                        <li class="fragment">
-                                            Repeatability
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li class="fragment">
-                                            Availability
-                                        </li>
-                                        <li class="fragment">
-                                            Distrubutable
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </table>
-                    </section>
-                    
-                    <section>
-    
-                        <h2>Docker Basics</h2>
-                        <div class="fragment">
-                            Dockerfiles
-                            <pre><code data-trim>
-FROM dockerfile/nodejs
-MAINTAINER &lt;name&gt; &lt;email address&gt;
-
-RUN npm install -g http-server
-
-ADD ./src /data/
-
-CMD http-server /data/src -c-1 --cors
-
-                            </code></pre>
-                        </div>
-                        <br>
-                        <div class="fragment">
-                            To build an image
-                            <pre><code data-trim>
-$ docker build -t &lt;image name&gt; &lt;path to dockerfile directory&gt;
-                            </code></pre>
-                        </div>
-
-                        <div class="fragment">
-                            To run an image
-                            <pre><code data-trim>
-$ docker run &lt;image name&gt;
-                            </code></pre>
-                        </div>
-
-
-                    </section>
-
-				</section>
-
-				<section>
-                    <section>
-                        <h2>Docker and Friends</h2>
-                        <p>
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2>Docker Tools</h2>
-                        <ul>
-                            <li class="fragment">
-                                docker-machine
-                            </li>
-                            <li class="fragment">
-                                docker-swarm
-                            </li>
-                        </ul>
-                        <br>
-                        <p class="fragment">
-                            <small>
-                                These tools may be unstable and usage may be subject to change as they are extremely new. 
-                            </small>
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2>
-                            docker-machine
-                        </h2>
-                        <table>
-                            <tr>
-                                <td class="fragment">
-                                    Simplifies installing docker:
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <ul>
-                                        <li class="fragment">
-                                            allows cross-platform docker
-                                        </li>
-                                        <li class="fragment">
-                                            has support for different "drivers"
-                                            <ul>
-                                                <li class="fragment">
-                                                    Virtual Box
-                                                </li>
-                                                <li class="fragment">
-                                                    Digital Ocean
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </table>
-                    </section>
-
-                    <section>
-                        <h2>docker-swarm</h2>
-                        <table class="fragment">
-                            <tr>
-                                <td >
-                                    Simplifies scaling docker:
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <ul>
-                                        <li class="fragment">
-                                            Interfaced worker control
-                                        </li>
-                                        <li class="fragment">
-                                            Easy discovry of new workers
-                                            <ul>
-                                                <li class="fragment">
-                                                    Token based discovery
-                                                </li>
-                                                <li class="fragment">
-                                                    IP configuration discovery
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="fragment">
-                                            Quickly deploy new workers 
-                                        </li>
-                                        <li class="fragment">
-                                            Communications betweem master and workers secured by SSH tunnel
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </table>
-                    </section>
-
-                    <section>
-                        <h3>docker-machine and docker-swarm togeather</h3>
-                        
-                        <div class="fragment">
-                        <p>Create a Docker Swarm</p>
-                        <pre><code data-trim>
-$ docker run swarm create
-0a7as347861277c3ea4eacc44e9d34e2
-                        </code></pre>
-                        </div>
-
-                        <div class="fragment">
-                            <p>Create a Swarm Host</p>
-                            <pre><code data-trim>
-$ doeker-machine create -d virtualbox --swarm --swarm-master \
-    --swarm-discovery=token://0a7as347861277c3ea4eacc44e9d34e2 swarm-master
-
-                            </code></pre>
-                        </div>
-
-                        <div class="fragment">
-                            <p>Create a few swarm nodes</p>
-                            <pre><code data-trim>
-docker-machine create -d virtualbox --swarm \
-    --swarm-discovery=token://0a7as347861277c3ea4eacc44e9d34e2 swarm-01
-
-docker-machine create -d virtualbox --swarm \
-    --swarm-discovery=token://0a7as347861277c3ea4eacc44e9d34e2 swarm-02
-
-docker-machine create -d virtualbox --swarm \
-    --swarm-discovery=token://0a7as347861277c3ea4eacc44e9d34e2 swarm-03
-
-                            </code></pre>
-                        </div>
-                    </section>
-
-                    <section>
-                        <h2>Controlling the Swarm</h2>
-                        <div class="fragment">
-                            <pre><code data-trim>
-docker -H &lt;swarm master ip&gt;:&lt;port&gt; &lt;docker command&gt;
-                            </code></pre>
-                        </div>
-                    </section>
-
-				</section>
-
-                <section>
-                    <section>
-                        <h2>Simple, Reproducable, Master</h2>
-                        <p class="fragment">Creating a Master server is simple using Docker.</p>
-                        <ol>
-                            <li class="fragment">
-                                Create a Dockerfile for the server 
-                            </li>
-                            <li class="fragment">
-                                Build the Docker image
-                            </li>
-                            <li class="fragment">
-                                Run Docker image
-                            </li>
-                        </ol>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>Distributed, Swarmed Workers</h2>
-                    <p class="fragment">
-                    Creating a swarmed worker set is almost as easy using docker-machine and docker-swarm.
-                    </p>
-                    <ol>
-                        <li class="fragment">
-                            Create a Dockerfile for the workers
-                        </li>
-                        <li class="fragment">
-                            Create a swarm
-                        </li>
-                        <li class="fragment">
-                            Create a Swarm Master
-                        </li>
-                        <li class="fragment">
-                            Create Nodes
-                        </li>
-                        <li class="fragment">
-                            Build worker image on Swarm Master
-                            <ul>
-                                <li class="fragment">
-                                    This will bubble through to workers
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="fragment">
-                            Run worker image
-                            <ul>
-                                <li class="fragment">
-                                    This will also bubble through to workers
-                                </li>
-                            </ul>
-                        </li>
-                    </ol>
-                </section>
-
-                <section>
-                    <section>
-                    <h2>Conclusion</h2>
-                    </section>
-
-                    <section>
-                        <h2>But wait there's more!</h2>
-                        <ul>
-                            <li class="fragment">
-                                --privleged
+                            <li class="fragment">Open Source Library</li>
+                            <li class="fragment">Created by Google</li>
+                            <li class="fragment">Machine Learning Models Python or C++</li>
+                            <li class="fragment">CPU or GPU architectures</li>
+                            <li class="fragment">Represents Models as graphs
                                 <ul>
                                     <li class="fragment">
-                                        Allows Docker to run <em>inside</em> Docker
+                                        Nodes = Math Operations
                                     </li>
                                     <li class="fragment">
-                                        CI server running in Docker could build and run Docker images inside itself
+                                        Edges = Multidimensional data arrays <span class="fragment">(Tensors)</span>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="fragment">
-                                docker-compose
-                                <ul>
-                                    <li class="fragment">
-                                        <pre><code data-trim>
-$ docker-compose scale 500
-
-                                        </code></pre>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                            <li class="fragment">Recently added Distributed Support</li>
                     </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Model</h2>
+                        <image height="500px" src="images/model_overview.png"/>
+                    </section>
+
+                    <section>
+                        <h2>Embedding Layer</h2>
+                        <image src="images/embedding.png"/>
+                    </section>
+                    <section>
+                        <h2>Covolutional Layers</h2>
+                        <image src="images/convolutional_layer.png"/> 
+                    </section>
+                    <section>
+                        <h2>Dropout Layer</h2>
+                    </section>
+                    <section>
+                        <h2>Output Layer</h2>
+                        <image src="images/output_layer.png"/>
+                    </section>
+                    <section>
+                        <h2>Loss</h2>
+                        <image height="500px" src="images/loss_layer.png"/>
+                    </section>
+                    <section>
+                        <h2>Accuracy</h2>
+                        <image height="500px" src="images/accuracy.png"/>
+                    </section>
+                    <section>
+                        <h2>Recap of Model</h2>
+                        <image height="500px" src="images/model_overview.png"/>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Dataset and Expirimental Setup</h2>
+                    </section>
+                    <section>
+                        <section>
+                            <h2>Data Preprocessing</h2>
+                        </section>
+                        <section> 
+                            <h2>Hyperparameter Tuning</h2>
+                        </section>
+                        <section>
+                            <h2>Model Variations</h2>
+                        </section>
+
+                    </section>
+            
                 </section>
                 
-                <section>
-                    <h2>Thank You</h2>
-                </section>
-                <section>
-                    <table>
-                        <tr>
-                            <th>
-                                Credits
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                "Announcing Docker Machine Beta". n.p. 26 Feb. 2015. Web. 30 Feb.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                "Dockerfile Reference". n.p. d.n. Web 6 Feb. 2015.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                "Docker Machine" n.p. n.d. Web. 31 Feb. 2015.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                "Docker Swarm" n.p. n.d. Web. 31 Feb. 2015.
-                            </td>
-                        </tr>
-                    </table>
-                </section>
-                <section>
-                    <table>
-                        <tr>
-                            <th>
-                                Credits Continued
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                Fowler, Martin. "Pheonix Server". n.p. 10 July. 2012. Web. 6 Feb. 2015.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                "Orchestrating Docker with Machine, Swarm, and Compose". 26 Feb. 2015. Web. 30 Feb. 2015.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                "Scaling Docker with Swarm" n.p. 26 Feb. 2015. Web. 30 Feb. 2015.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                "What is Docker?" Docker. Docker Inc. n.d. Web. 6 Feb. 2015.
-                            </td>
-                        </tr>
-                    </table>
-                </section>
 
 			</div>
 
