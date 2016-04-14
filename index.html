@@ -101,35 +101,42 @@
                 <section>
                     <section>
                         <h2>Model</h2>
-                        <image height="500px" src="images/model_overview.png"/>
+                        <image height="500px" data-src="images/model_overview.png"/>
                     </section>
 
                     <section>
                         <h2>Embedding Layer</h2>
-                        <image src="images/embedding.png"/>
+                        <image data-src="images/embedding.png"/>
+                    </section>
+                    <section>
+                        <image height="600px" data-src="images/tsne.png"/>
+                    </section>
+                    <section>
+                        <image height="600px" data-src="images/tsne_zoom.png"/>
                     </section>
                     <section>
                         <h2>Covolutional Layers</h2>
-                        <image src="images/convolutional_layer.png"/> 
+                        <image data-src="images/convolutional_layer.png"/> 
                     </section>
                     <section>
                         <h2>Dropout Layer</h2>
+                        <image data-src="images/dropout.png"/>
                     </section>
                     <section>
                         <h2>Output Layer</h2>
-                        <image src="images/output_layer.png"/>
+                        <image data-src="images/output_layer.png"/>
                     </section>
                     <section>
                         <h2>Loss</h2>
-                        <image height="500px" src="images/loss_layer.png"/>
+                        <image height="500px" data-src="images/loss_layer.png"/>
                     </section>
                     <section>
                         <h2>Accuracy</h2>
-                        <image height="500px" src="images/accuracy.png"/>
+                        <image height="500px" data-src="images/accuracy.png"/>
                     </section>
                     <section>
                         <h2>Recap of Model</h2>
-                        <image height="500px" src="images/model_overview.png"/>
+                        <image height="500px" data-src="images/model_overview.png"/>
                     </section>
                 </section>
 
@@ -201,11 +208,159 @@
                     <section>
                         <h2>Model Variations</h2>
                     </section>
+                    <section>
+                        <h2>N-T-Names</h2>
+                        <table>
+                            <tr><td></td></tr>
+                            <tr class="fragment">
+                                <td>Baseline model</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>Non-unique twitter names are removed
+                                    <br>Example: <code>&lt;AT_NAME/&gt;</code>
+                                </td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>Word embeddings randomly initialized and trained with model</td>
+                            </tr>
+                            <tr><td></td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h2>U-T-Names</h2>
+                        <table>
+                            <tr><td></td></tr>
+                            <tr class="fragment">
+                                <td>Based on the baseline model (N-T-Names)</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>Twitter usernames are replaced with a unique token
+                                    <br>Example: <code>&lt;AT_NAME_<b><em>123</em></b>/&gt;</code>
+                                </td>
+                            </tr>
+                            <tr><td></td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h2>G-N-Vecs:</h2>
+                        <table>
+                            <tr><td></td></tr>
+                            <tr class="fragment">
+                                <td>Base on the baseline model (N-T-Names)</td>
+                            </tr>
+                            <tr class="fragment"> 
+                                <td>Initialized with 300 dimension pre-trained word embeddings
+                                    <ul>
+                                        <li class="fragment">Publicly available model</li>
+                                        <li class="fragment">Trained using <code>word2vec</code></li>
+                                        <li class="fragment">Trained on 100 billion words from Google News articles</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr><td></td></tr>
+                        </table>
+                    </section>
                 </section>
-                
+                <section>
+                    <section>
+                        <h2>Results and Graphs</h2>
+                        <table>
+                            <tr>
+                                <th>Model</th>
+                                <th>Accuracy</th>
+                                <th>Specificity</th>
+                                <th>Sensitivity</th>
+                            </tr>
+                            <tr>
+                                <td>N-T-Names</td>
+                                <td><mark>0.877</mark></td>
+                                <td>1.000</td>
+                                <td><mark>0.394</mark></td>
+                            </tr>
+                            <tr>
+                                <td>U-T-Names</td>
+                                <td>0.873</td>
+                                <td>1.000</td>
+                                <td>0.377</td>
+                            </tr>
+                            <tr>
+                                <td>G-N-Vecs</td>
+                                <td>0.872</td>
+                                <td>1.000</td>
+                                <td>0.254</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h2>N-T-Names</h2>
+                        <image data-src="images/N-T-Names-acc.png"/>
+                    </section>
+                    <section>
+                        <h2>N-T-Names</h2>
+                        <image data-src="images/N-T-Names-acc-converge.png"/>
+                    </section>
+                    <section>
+                        <h2>U-T-Names</h2>
+                        <image data-src="images/U-T-Names-acc.png"/>
+                    </section>
+                    <section>
+                        <h2>U-T-Names</h2>
+                        <image data-src="images/U-T-Names-acc-full-overfit.png"/>
+                    </section>
+                    <section>
+                        <h2>U-T-Names</h2>
+                        <h4 class="fragment">-- Overfitting --</h4>
+                        <image height="500px" data-src="images/U-T-Names-overfit.png"/>
+                    </section>
+                    <section>
+                        <h2>G-N-Vecs</h2>
+                        <image data-src="images/G-N-Vecs-acc.png"/>
+                    </section>
+                </section>
 
+                <section>
+                    <section>
+                        <h2>References</h2>
+                        <table>
+                            <tr>
+                                <td>Mikolov et al. Distributed Representations of Words and Phrases and their Compositionality. In <em>Preceedings of ACL 2002</em>, October 2013.</td>
+                            </tr>
+                            <tr>
+                                <td>Britz D. Implementation a CNN for Text Classification in Tensorflow. <em>WildML</em>, December 2015.</td>
+                            </tr>
+                            <tr>
+                                <td>Kim, Y. Convolutional Neural Networks for Sentence Classification. In <em>EMNLP 2014</em>, September 2014.</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h2>References</h2>
+                        <table>
+                            <tr>
+                                <td>Abadi et al. Vector Representations of Words. 2015</td>
+                            <tr>
+                                <td>Goldberg and Levy. Word2Vec Explained: Deriving Mikolov et al.'s Negative-Sampling Word-Embedding Method. February 2014.</td>
+                            </tr>
+                            <tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h4>References</h4>
+                        <p>Martín Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo,
+Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis,
+Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow,
+Andrew Harp, Geoffrey Irving, Michael Isard, Rafal Jozefowicz, Yangqing Jia,
+Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dan Mané, Mike Schuster,
+Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Jonathon Shlens,
+Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker,
+Vincent Vanhoucke, Vijay Vasudevan, Fernanda Viégas,
+Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke,
+Yuan Yu, and Xiaoqiang Zheng.
+TensorFlow: Large-scale machine learning on heterogeneous systems,
+2015. Software available from tensorflow.org.</p>
+                    </section>
+                </section>
 			</div>
-
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
@@ -221,7 +376,7 @@
 				history: true,
 				center: true,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				transition: 'concave', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins
 				dependencies: [
