@@ -66,17 +66,6 @@
                         </li>
                         <li class="fragment">
                             Dataset and Expirimental Setup
-                            <ul>
-                                <li class="fragment">
-                                    Data Preprocessing
-                                </li>
-                                <li class="fragment">
-                                    Hyperparameter Tuning
-                                </li>
-                                <li class="fragment">
-                                    Model Variations
-                                </li>
-                            </ul>
                         </li>
                         <li class="fragment">
                             Results and Graphs
@@ -149,18 +138,69 @@
                         <h2>Dataset and Expirimental Setup</h2>
                     </section>
                     <section>
-                        <section>
-                            <h2>Data Preprocessing</h2>
-                        </section>
-                        <section> 
-                            <h2>Hyperparameter Tuning</h2>
-                        </section>
-                        <section>
-                            <h2>Model Variations</h2>
-                        </section>
-
+                        <h2>Data Set</h2>
+                        <table>
+                            <tr class="fragment">
+                                <td>Total Tweets</td>
+                                <td>5808</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>Negative Examples</td>
+                                <td>4155</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>Positive Examples</td>
+                                <td>1653</td>
+                            </tr>
+                        </table>
                     </section>
-            
+                    <section>
+                            <h2>Data Preprocessing</h2>
+                            <table>
+                                <tr class="fragment">
+                                    <td>Original Tweet</td>
+                                    <td>|<br>|</td>
+                                    <td>@HillaryClinton why always so #smug? https://t.co/eOU1rOaOlR</td>
+                                </tr>
+                                <tr class="fragment">
+                                    <td>Preprocessed Tweet</td>
+                                    <td>|<br>|</td>
+                                    <td>&lt;AT_NAME/&gt; why always so #smug &lt;URL/&gt; </td>
+                                </tr>
+                            </table>
+                    </section>
+                    <section> 
+                        <h2>Hyperparameter Tuning</h2>
+                        <table>
+                            <tr>
+                                <td>Filter Windows</td>
+                                <td>3, 4, 5</td>
+                            </tr>
+                            <tr>
+                                <td>Dropout Rate</td>
+                                <td>0.5</td>
+                            </tr>
+                            <tr>
+                                <td>L2 constrains</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>Mini-batch size</td>
+                                <td>64</td>
+                            </tr>
+                            <tr>
+                                <td>Filters per size</td>
+                                <td>50</td>
+                            </tr>
+                            <tr>
+                                <td>Word embedding dimensions*</td>
+                                <td>20</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h2>Model Variations</h2>
+                    </section>
                 </section>
                 
 
