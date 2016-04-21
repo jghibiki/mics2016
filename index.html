@@ -118,10 +118,15 @@
                         <image height="600px" data-src="images/tsne_zoom.png"/>
                     </section>
                     <section>
-                        <h2 class="fragment">Covolutional Layers</h2>
+                        <h2>Covolutional Layers</h2>
+                        <image class="fragment" data-src="images/model.png"/>
+                    </section>
+                    <section>
                         <h2 class="fragment">Output Layer</h2>
                         <h2 class="fragment">Loss</h2>
                         <h2 class="fragment">Accuracy</h2>
+                        <h2 class="fragment">Sensitivity</h2>
+                        <h2 class="fragment">Sensibility</h2>
                     </section>
                 </section>
 
@@ -242,7 +247,29 @@
                                     </ul>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="fragment">If word is not included in 300 dimmension pre-trained word embeddings it is initialized randomly.</td>
+                            </tr>
                             <tr><td></td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <table>
+                            <tr class="fragment">
+                                <td>Total Words</td>
+                                <td>8313</td>
+                                <td>100% of words</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>Pre-trained Embeddings</td>
+                                <td>5841</td>
+                                <td>70.3% of words</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>Randomly Initialized embeddings</td>
+                                <td>2472</td>
+                                <td>29.7% of words</td>
+                            </tr>
                         </table>
                     </section>
                 </section>
